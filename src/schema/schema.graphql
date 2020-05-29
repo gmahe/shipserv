@@ -1,0 +1,26 @@
+directive @isAuthenticated on FIELD | FIELD_DEFINITION
+
+type User {
+  id: ID
+  name: String
+  email: String
+  phone: String @isAuthenticated
+}
+
+type Department {
+  id: ID!
+  name: String
+  address: String
+  users: [User!]
+}
+
+type Query {
+  me: User
+  user(id: ID!): User
+  users: [User]
+  department(id: ID!): Department
+}
+
+type Mutation {
+  login(email: String!, password: String!): String
+}
